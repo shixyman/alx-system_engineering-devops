@@ -3,18 +3,15 @@
 #   Displays hours from 0 to 12
 #   Displays minutes from 1 to 59
 
+count=1
 
-hours=0
-
-while [ $hours -le 12 ]
+while [ $count -le 20 ]
 do
-  echo "Hour:$hour"
-  minutes=1
-  while [ $minutes -le 59 ]
-  do
-    echo "$minutes"
-    ((minutes++))
-  done
-
-  ((hours++))
+  echo "$count"
+  case $count in
+    "4") echo "bad luck from China";;
+    "9") echo "bad luck from Japan";;
+    "17") echo "bad luck from Italy";;
+  esac
+  (( count++ ))
 done
