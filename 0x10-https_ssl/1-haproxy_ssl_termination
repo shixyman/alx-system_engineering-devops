@@ -37,7 +37,8 @@ front http_front
         http-request add-header X-Forwarded-Proto http
         http-request redirect scheme https if !{ ssl_fc }
         use_backend http_back
-backend http_back
-        redirect scheme https if !{ ssl_fc }
+backend www-backend
+	balance  roundrobin
+	redirect scheme https if !{ ssl_fc }
         server 421656-web-01 3.84.158.78:80
         server 421656-web-02 35.153.232.69:80
