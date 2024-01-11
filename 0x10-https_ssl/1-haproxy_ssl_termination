@@ -32,13 +32,22 @@ defaults
         errorfile 502 /etc/haproxy/errors/502.http
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
-front http_front
-        bind   0.0.0.0:443 ssl crt /etc/letsencrypt/live/www.shixyman.tech/fullchain.pem
-        http-request add-header X-Forwarded-Proto http
-        http-request redirect scheme https if !{ ssl_fc }
-        use_backend http_back
-backend www-backend
-	balance  roundrobin
-	redirect scheme https if !{ ssl_fc }
+
+# start of parameter shixyman.tech
+frontend a shixyman.tech-http-frontend
+	bind	 *:80
+	http-request set-header X-Forwarded-Proto http
+	default_backend	 a shixyman.tech-backend
+
+
+frontend  a shixyman.tech-https-frontend
+	bind *:443 ssl crt /etc/ssl/a shixyman.tech.pem
+	http-request set-header X-Forwarded-Proto https
+        default_backend a shixyman.tech-backend
+
+
+backend a shixyman.tech-backend
+        balance roundrobin
         server 421656-web-01 3.84.158.78:80
         server 421656-web-02 35.153.232.69:80
+# end of parameters
