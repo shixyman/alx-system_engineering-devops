@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-#!/usr/bin/python3
+
 """Returns to-do list information for a given employee ID."""
 import requests
 import sys
@@ -18,4 +18,3 @@ if __name__ == "__main__":
     )
     for c in completed:
         print("\t {}".format(c))
-
