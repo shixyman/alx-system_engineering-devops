@@ -20,3 +20,4 @@ def number_of_subscribers(subreddit):
         return subscribers if subscribers is not None else 0
     except (requests.RequestException, ValueError):
         return 0
+    
